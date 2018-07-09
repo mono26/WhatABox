@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Floor
+  - Falling
+  - Collectable
+  - SlowMotion
+  - EndOfLevel
+  - SpeedUp
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - Floor
+  - Falling
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 1311992575
+    locked: 0
+  - name: Collectable
+    uniqueID: 1352834747
+    locked: 0
+  - name: Blocks
+    uniqueID: 3614608541
+    locked: 0
+  - name: Player
+    uniqueID: 3591572275
+    locked: 0
+  - name: UI
+    uniqueID: 3836234107
+    locked: 0
