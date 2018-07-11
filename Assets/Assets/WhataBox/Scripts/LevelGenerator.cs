@@ -15,6 +15,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     protected int maxSpawnTries = 10;
     [SerializeField]
+    protected float maxSpaceBetweenObstacle = 1;
+    [SerializeField]
     protected float minSpaceBetweenObstacle = 1;
     [SerializeField]
     protected float minSpaceBetweenPickable = 0.5f;
@@ -50,22 +52,12 @@ public class LevelGenerator : MonoBehaviour
         {
             for(int i = 0; i < obj.numberOfSpawns; i++)
             {
+                Vector2 objSize = CalculateObjectToSpawnSize(obj.objectToSpawn);
+
                 for (int j = 0; j < maxSpawnTries; j++)
                 {
-                    float x = Random.Range(
-                        transform.position.x - widthBounds/2, 
-                        transform.position.x + widthBounds/2
-                        );
-                    float y = Random.Range(
-                        transform.position.y - heightBounds/2, 
-                        transform.position.y + heightBounds/2
-                        );
+                    Vector2 position = CalculateRandomPosition();
 
-                    Vector2 position = new Vector2(x, y);
-                    Vector2 objSize = new Vector2(
-                        obj.objectToSpawn.Width + minSpaceBetweenObstacle*2, 
-                        obj.objectToSpawn.Height + minSpaceBetweenObstacle*2
-                        );
                     freeSpotHit = Physics2D.BoxCast(position, objSize, 0, Vector2.zero, 0);
                     //DebugExtension.DebugBounds(new Bounds(position, objSize), Color.red, 10);
                     if (freeSpotHit.collider == null)
@@ -88,22 +80,12 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int i = 0; i < obj.numberOfSpawns; i++)
             {
+                Vector2 objSize = CalculateObjectToSpawnSize(obj.objectToSpawn);
+
                 for (int j = 0; j < maxSpawnTries; j++)
                 {
-                    float x = Random.Range(
-                        transform.position.x - widthBounds / 2,
-                        transform.position.x + widthBounds / 2
-                        );
-                    float y = Random.Range(
-                        transform.position.y - heightBounds / 2,
-                        transform.position.y + heightBounds / 2
-                        );
+                    Vector2 position = CalculateRandomPosition();
 
-                    Vector2 position = new Vector2(x, y);
-                    Vector2 objSize = new Vector2(
-                        obj.objectToSpawn.Width + minSpaceBetweenPickable * 2,
-                        obj.objectToSpawn.Height + minSpaceBetweenPickable * 2
-                        );
                     freeSpotHit = Physics2D.BoxCast(position, objSize, 0, Vector2.zero, 0);
                     //DebugExtension.DebugBounds(new Bounds(position, objSize), Color.red, 10);
                     if (freeSpotHit.collider == null)
@@ -120,8 +102,31 @@ public class LevelGenerator : MonoBehaviour
 
     protected void SpawnObject(SpawnableObject _objectToSpawn, Vector2 _position)
     {
-        Instantiate(_objectToSpawn, _position, Quaternion.identity);
+        SpawnableObject obj = Instantiate(_objectToSpawn, _position, Quaternion.identity);
+        obj.transform.SetParent(transform);
 
         return;
+    }
+
+    protected Vector2 CalculateObjectToSpawnSize(SpawnableObject _objectToSpawn)
+    {
+        return new Vector2(
+                        _objectToSpawn.Width + Random.Range(minSpaceBetweenObstacle, maxSpaceBetweenObstacle) * 2,
+                        _objectToSpawn.Height + Random.Range(minSpaceBetweenObstacle, maxSpaceBetweenObstacle) * 2
+                        );
+    }
+
+    protected Vector2 CalculateRandomPosition()
+    {
+        float x = Random.Range(
+            transform.position.x - widthBounds / 2,
+            transform.position.x + widthBounds / 2
+            );
+        float y = Random.Range(
+            transform.position.y - heightBounds / 2,
+            transform.position.y + heightBounds / 2
+            );
+
+        return new Vector2(x, y);
     }
 }
