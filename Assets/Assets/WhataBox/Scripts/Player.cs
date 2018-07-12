@@ -3,36 +3,58 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float my_Acceleration;
-    public float my_MaxSpeed;
-    public Rigidbody2D my_RigidBody;
-    public float my_MapWith;
-    public float my_HorizontalInput;
+    [Header("Player settings")]
+    [SerializeField]
+    protected float acceleration;
+    [SerializeField]
+    protected float maxSpeed;
+    [SerializeField]
+    protected Rigidbody2D body;
+    [SerializeField]
+    protected float mapWith;
+    [SerializeField]
+    protected float slowMotionValue = 0.5f;
+    [SerializeField]
+    protected float slowMotionDuration = 3f;
 
-    public bool left;
-    public bool right;
+    [Header("Editor debugging")]
+    [SerializeField]
+    protected bool left;
+    [SerializeField]
+    protected bool right;
+    [SerializeField]
+    protected float horizontalInput;
 
-    private void Start()
+    protected void Awake()
     {
-        my_RigidBody = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
     }
-    private void FixedUpdate()
+
+    protected void Update()
     {
-        if(left)
+        if (left == true)
         {
-            my_HorizontalInput = -1f * Mathf.Lerp(-my_HorizontalInput, my_MaxSpeed, my_Acceleration/10f);
+            horizontalInput = -1f * Mathf.Lerp(-horizontalInput, maxSpeed, acceleration / 10f);
         }
-        if(right)
+        if (right == true)
         {
-            my_HorizontalInput = 1f * Mathf.Lerp(my_HorizontalInput, my_MaxSpeed, my_Acceleration/10f);
+            horizontalInput = 1f * Mathf.Lerp(horizontalInput, maxSpeed, acceleration / 10f);
         }
-        else if(!left && !right)
+        else if (left == false && right == false)
         {
-            my_HorizontalInput = 0f;
+            horizontalInput = 0f;
         }
-        Vector2 newPosition = my_RigidBody.position + Vector2.right * my_HorizontalInput * Time.fixedDeltaTime;
-        newPosition.x = Mathf.Clamp(newPosition.x, -my_MapWith, my_MapWith);
-        my_RigidBody.MovePosition(newPosition);
+
+        return;
+    }
+
+    protected void FixedUpdate()
+    {
+        Vector2 newPosition = body.position + Vector2.right * horizontalInput * Time.fixedDeltaTime;
+        newPosition.x = Mathf.Clamp(newPosition.x, -mapWith/2 , mapWith/2);
+        body.MovePosition(newPosition);
+
+        return;
     }
     //Eventos Creados
     public void LeftPressed()
@@ -61,24 +83,24 @@ public class Player : MonoBehaviour
     {
         if(col.gameObject.CompareTag("Falling"))
         {
-            GameManager.Instance.GameOver();
+            LevelManager.Instance.GameOver();
         }
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Collectable"))
         {
-            GameManager.Instance.ChangeScore(5);
+            LevelManager.Instance.ChangeScore(5);
             GameObject.Destroy(col.gameObject);
         }
         if (col.CompareTag("SlowMotion"))
         {
-            GameManager.Instance.DoSlowMotion();
+            GameManager.Instance.SlowTimeOverTime(slowMotionValue, slowMotionDuration);
             GameObject.Destroy(col.gameObject);
         }
         if (col.CompareTag("EndOfLevel"))
         {
-            GameManager.Instance.WinLevel();
+            LevelManager.Instance.GameOver();
         }
         if(col.CompareTag("SpeedUp"))
         {

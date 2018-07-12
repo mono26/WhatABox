@@ -51,11 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbb474fcb2d7a64c835ba0148e22a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartSlowness: 10
-  scoreText: {fileID: 0}
-  startPosition: {x: 0, y: 0, z: 0}
-  floor: {fileID: 0}
-  timeScale: 0
-  slowDownFactor: 0.3
-  currentSlowTime: 0
   maxSlowTime: 2
+  slowDownFactor: 0.3
+  floor: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  prefab: {fileID: 114414586201490268, guid: 0fb15c5a1bd19d44e836931d756f27a1, type: 2}
+  scoreText: {fileID: 0}
+  currentSection: {fileID: 0}
+  nextSection: {fileID: 0}
+  startPosition: {x: 0, y: 0, z: 0}
+  gameIsOver: 0

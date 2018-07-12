@@ -12,6 +12,7 @@ public class LevelGenerator : MonoBehaviour
     [Header("Level Generator settings")]
     [SerializeField]
     protected float heightBounds = 30;
+    public float HeightBounds { get { return heightBounds; } }
     [SerializeField]
     protected int maxSpawnTries = 10;
     [SerializeField]
