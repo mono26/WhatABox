@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
     [Header("Level Manager settings")]
+    [SerializeField]
+    protected string mainMenuScene;
     [SerializeField]
     protected float maxSlowTime = 2.0f;
     [SerializeField]
@@ -67,14 +70,29 @@ public class LevelManager : Singleton<LevelManager>
 
     public void DestroyOldSection()
     {
-        Destroy(currentSection.gameObject);
+        Destroy(currentSection.gameObject, 3f);
         ChangeCurrentSection(nextSection);
 
         return;
     }
     public void ChangeCurrentSection(LevelGenerator _nextSection)
     {
-        nextSection = _nextSection;
+        currentSection = _nextSection;
+        return;
+    }
+
+    public void QuitLevel()
+    {
+        Time.timeScale = 1;
+        LoadManager.LoadScene(mainMenuScene);
+        //SoundManager.Instance.StopSound();
+        return;
+    }
+
+    public void RetryLevel()
+    {
+        //EventManager.TriggerEvent(new GameEvent(GameEventTypes.UnPause));
+        LoadManager.LoadScene(SceneManager.GetActiveScene().name);
         return;
     }
 }

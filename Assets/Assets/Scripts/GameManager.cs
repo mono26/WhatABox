@@ -8,18 +8,18 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Editor debugging")]
     [SerializeField]
-    protected float currentTimeScale;
+    protected float currentTimeScale = 1f;
 
-    protected void TriggerPause()
+    public void TriggerPause(bool _pause)
     {
-        IsPaused = !IsPaused;
-        if (IsPaused)
+        IsPaused = _pause;
+        if (IsPaused == true)
         {
             //LevelUIManager.Instance.ActivatePauseUI(true);
             Time.timeScale = 0;
             return;
         }
-        else if (!IsPaused)
+        else if (IsPaused == false)
         {
             //LevelUIManager.Instance.ActivatePauseUI(false);
             Time.timeScale = 1;

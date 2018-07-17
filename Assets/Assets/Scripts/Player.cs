@@ -79,32 +79,37 @@ public class Player : MonoBehaviour
     }
 
     //Eventos internos de Unity
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D _collision)
     {
-        if(col.gameObject.CompareTag("Falling"))
+        if(_collision.gameObject.CompareTag("Falling"))
         {
             LevelManager.Instance.GameOver();
+            GameManager.Instance.TriggerPause(true);
         }
+
+        return;
     }
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D _collider)
     {
-        if (col.CompareTag("Collectable"))
+        if (_collider.CompareTag("Collectable"))
         {
             LevelManager.Instance.ChangeScore(5);
-            GameObject.Destroy(col.gameObject);
+            GameObject.Destroy(_collider.gameObject);
         }
-        if (col.CompareTag("SlowMotion"))
+        if (_collider.CompareTag("SlowMotion"))
         {
             GameManager.Instance.SlowTimeOverTime(slowMotionValue, slowMotionDuration);
-            GameObject.Destroy(col.gameObject);
+            GameObject.Destroy(_collider.gameObject);
         }
-        if (col.CompareTag("EndOfLevel"))
+        if (_collider.CompareTag("EndOfLevel"))
         {
             LevelManager.Instance.GameOver();
         }
-        if(col.CompareTag("SpeedUp"))
+        if(_collider.CompareTag("SpeedUp"))
         {
             Floor.Instance.SpeedUp(0.25f);
         }
+
+        return;
     }
 }

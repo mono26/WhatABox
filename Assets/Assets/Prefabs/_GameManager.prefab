@@ -63,4 +63,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55447a83a023ef4428cc43e661895831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTimeScale: 0
+  currentTimeScale: 1
