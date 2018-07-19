@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbb474fcb2d7a64c835ba0148e22a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuScene: MainMenu
   maxSlowTime: 2
   slowDownFactor: 0.3
   floor: {fileID: 0}

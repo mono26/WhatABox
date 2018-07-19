@@ -15,13 +15,13 @@ public class GameManager : Singleton<GameManager>
         IsPaused = _pause;
         if (IsPaused == true)
         {
-            //LevelUIManager.Instance.ActivatePauseUI(true);
+            LevelUIManager.Instance.ActivatePauseUI(true);
             Time.timeScale = 0;
             return;
         }
         else if (IsPaused == false)
         {
-            //LevelUIManager.Instance.ActivatePauseUI(false);
+            LevelUIManager.Instance.ActivatePauseUI(false);
             Time.timeScale = 1;
             return;
         }

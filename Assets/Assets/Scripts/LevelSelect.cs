@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelSelector : MonoBehaviour
+public class LevelSelect : MonoBehaviour
 {
-    public SceneFader fader;
+    [SerializeField]
+    protected SceneFader fader;
+    [SerializeField]
+    protected Button[] levelButtons;
 
-    public Button[] levelButtons;
-
-    void Start()
+    protected void Start()
     {
         int levelReached = PlayerPrefs.GetInt("levelReached", 1);
 
@@ -16,10 +17,14 @@ public class LevelSelector : MonoBehaviour
             if (i + 1 > levelReached)
                 levelButtons[i].interactable = false;
         }
+
+        return;
     }
 
-    public void SelectLevel(string levelName)
+    public void LoadLevel(string _level)
     {
-        fader.FadeTo(levelName);
+        LoadManager.LoadScene(_level);
+
+        return;
     }
 }
