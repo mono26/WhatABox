@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,9 +54,7 @@ public class CameraFollow : MonoBehaviour
     protected void LateUpdate()
     {
         //GetLevelBounds();
-
-        if (_player != null)
-            FollowPlayer();
+        FollowPlayer();
 
         return;
     }

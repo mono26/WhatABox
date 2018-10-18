@@ -13,23 +13,19 @@ public class GameManager : Singleton<GameManager>
     public void TriggerPause(bool _pause)
     {
         IsPaused = _pause;
-        if (IsPaused == true)
-        {
-            LevelUIManager.Instance.ActivatePauseUI(true);
+        if (IsPaused == true) {
             Time.timeScale = 0;
-            return;
         }
-        else if (IsPaused == false)
-        {
-            LevelUIManager.Instance.ActivatePauseUI(false);
+        else if (IsPaused == false) {
             Time.timeScale = 1;
-            return;
         }
+        return;
     }
 
-    public void SetTimeScale(float _timeScale)
+    public void SetTimeScale(float _targetTimeScale)
     {
-        Time.timeScale = _timeScale;
+        currentTimeScale = _targetTimeScale;
+        Time.timeScale = currentTimeScale;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
 
         return;

@@ -94,12 +94,12 @@ public class Player : MonoBehaviour
         if (_collider.CompareTag("Collectable"))
         {
             LevelManager.Instance.ChangeScore(5);
-            GameObject.Destroy(_collider.gameObject);
+            Destroy(_collider.gameObject);
         }
         if (_collider.CompareTag("SlowMotion"))
         {
-            GameManager.Instance.SlowTimeOverTime(slowMotionValue, slowMotionDuration);
-            GameObject.Destroy(_collider.gameObject);
+            StartCoroutine(GameManager.Instance.SlowTimeOverTime(slowMotionValue, slowMotionDuration)); 
+            Destroy(_collider.gameObject);
         }
         if (_collider.CompareTag("EndOfLevel"))
         {
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         }
         if(_collider.CompareTag("SpeedUp"))
         {
-            Floor.Instance.SpeedUp(0.25f);
+            Floor.Instance.SpeedUp(0.5f);
         }
 
         return;

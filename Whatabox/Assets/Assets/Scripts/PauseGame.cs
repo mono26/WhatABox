@@ -3,9 +3,9 @@
 public class PauseGame : MonoBehaviour
 {
     /// Puts the game on pause
-    public virtual void PauseAction(bool _pause)
+    public virtual void PauseAction(bool _isPause)
     {
-        GameManager.Instance.TriggerPause(_pause);
+        LevelManager.Instance.PauseLevel(_isPause);
 
         return;
     }

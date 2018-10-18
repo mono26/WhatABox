@@ -58,7 +58,7 @@ public class LevelGenerator : MonoBehaviour
                 for (int j = 0; j < maxSpawnTries; j++)
                 {
                     Vector2 position = CalculateRandomPosition();
-
+                    // TODO refactorizate collision check.
                     freeSpotHit = Physics2D.BoxCast(position, objSize, 0, Vector2.zero, 0);
                     //DebugExtension.DebugBounds(new Bounds(position, objSize), Color.red, 10);
                     if (freeSpotHit.collider == null)

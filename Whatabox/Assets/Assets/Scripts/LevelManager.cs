@@ -38,7 +38,7 @@ public class LevelManager : Singleton<LevelManager>
     private void Start()
     {
         startPosition = floor.position;
-
+        GameManager.Instance.SetTimeScale(1);
         return;
     }
     private void Update()
@@ -93,6 +93,13 @@ public class LevelManager : Singleton<LevelManager>
     {
         //EventManager.TriggerEvent(new GameEvent(GameEventTypes.UnPause));
         LoadManager.LoadScene(SceneManager.GetActiveScene().name);
+        return;
+    }
+
+    public void PauseLevel(bool _isPause)
+    {
+        GameManager.Instance.TriggerPause(_isPause);
+        LevelUIManager.Instance.ActivatePauseUI(_isPause);
         return;
     }
 }
